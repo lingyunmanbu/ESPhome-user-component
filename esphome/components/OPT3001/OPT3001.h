@@ -15,7 +15,7 @@ class OPT3001Component : public PollingComponent, public i2c::I2CDevice{
   void dump_config() override;
   float get_setup_priority() const override;
   void update() override;
-  int state() override;
+  int state();
 
   protected:
     void configureSensor_();
