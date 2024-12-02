@@ -82,7 +82,7 @@ static const char *const TAG = "opt3001";
   }
   int OPT3001Component::state() {
     int lux_level = myself.readResult().lux;
-    return lux_level
+    return lux_level;
   }
 
 }// Namespace ESP
