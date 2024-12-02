@@ -80,6 +80,10 @@ static const char *const TAG = "opt3001";
     int lux_level = myself.readResult().lux;
     this->ambient_light_sensor_->publish_state(lux_level);
   }
+  int OPT3001Component::state() {
+    int lux_level = myself.readResult().lux;
+    return lux_level
+  }
 
 }// Namespace ESP
 }// Namespace OPT3001
