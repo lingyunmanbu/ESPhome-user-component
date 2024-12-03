@@ -104,9 +104,9 @@ static const char *const TAG = "opt3001";
 //   }
 // }
 
-float OPT3001Component::state() {
-  return this->current_lux_;  // Return the stored lux value
-}
+  int OPT3001Component::state() {
+    return this->current_lux_;  // Return the stored lux value
+  }
 
 }// Namespace ESP
 }// Namespace OPT3001
