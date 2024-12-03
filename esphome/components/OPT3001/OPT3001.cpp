@@ -85,6 +85,7 @@ static const char *const TAG = "opt3001";
     ESP_LOGD("update", "Sending update");
     int lux_level = myself.readResult().lux;
     this->current_lux_ = lux_level;  // Store the current lux value
+    ESP_LOGD(TAG, "Lux: %.d", lux_level);
     this->ambient_light_sensor_->publish_state(lux_level);
   }
 //  void OPT3001Component::update() {
