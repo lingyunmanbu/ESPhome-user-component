@@ -82,21 +82,27 @@ static const char *const TAG = "opt3001";
 //  }
 
  void OPT3001Component::update() {
-  ESP_LOGD(TAG, "Reading OPT3001 data...");
-  OPT3001_Result result = myself.readResult();
-  if (result.error == NO_ERROR) {
-    float lux = result.lux;
-    ESP_LOGD(TAG, "Lux: %.2f", lux);
-    this->current_lux_ = lux;  // Store the current lux value
-    if (this->ambient_light_sensor_ != nullptr) {
-      this->ambient_light_sensor_->publish_state(lux);
-    } else {
-      ESP_LOGW(TAG, "No ambient light sensor set!");
-    }
-  } else {
-    ESP_LOGE(TAG, "Error reading OPT3001: %d", result.error);
+    ESP_LOGD("update", "Sending update");
+    int lux_level = myself.readResult().lux;
+    this->current_lux_ = lux_level;  // Store the current lux value
+    this->ambient_light_sensor_->publish_state(lux_level);
   }
-}
+//  void OPT3001Component::update() {
+//   ESP_LOGD(TAG, "Reading OPT3001 data...");
+//   OPT3001_Result result = myself.readResult();
+//   if (result.error == NO_ERROR) {
+//     float lux = result.lux;
+//     ESP_LOGD(TAG, "Lux: %.2f", lux);
+//     this->current_lux_ = lux;  // Store the current lux value
+//     if (this->ambient_light_sensor_ != nullptr) {
+//       this->ambient_light_sensor_->publish_state(lux);
+//     } else {
+//       ESP_LOGW(TAG, "No ambient light sensor set!");
+//     }
+//   } else {
+//     ESP_LOGE(TAG, "Error reading OPT3001: %d", result.error);
+//   }
+// }
 
 float OPT3001Component::state() {
   return this->current_lux_;  // Return the stored lux value
